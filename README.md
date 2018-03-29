@@ -14,6 +14,8 @@ export TF_VAR_aws_region="eu-west-1"
 export GOOGLE_CLOUD_KEYFILE_JSON=$HOME/.gcp/nomad-multi-cloud.json
 ```
 
+Change directory to the `terraform` folder in the root of this repo
+
 Run `terraform plan` check everything looks ok then run `terraform apply` to create the clusters and a VPN linking the two together.
 
 ```bash
