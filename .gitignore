@@ -1,0 +1,4 @@
+.envrc
+terraform.tfstate
+.terraform
+terraform.tfstate.backup
