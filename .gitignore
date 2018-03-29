@@ -1,4 +1,5 @@
 .envrc
 terraform.tfstate
 .terraform
+.terraform.tfstate.lock.info
 terraform.tfstate.backup
