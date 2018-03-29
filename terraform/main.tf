@@ -21,7 +21,8 @@ module "gcp" {
 
 # Create a VPN connection between GCP and AWS
 module "vpn" {
-  source = "/Users/nicj/Developer/terraform/terraform-aws-gcp-vpn"
+  source  = "nicholasjackson/gcp-vpn/aws"
+  version = "0.1.0"
 
   aws_cidr = "10.0.0.0/16"
   gcp_cidr = "10.128.0.0/20"

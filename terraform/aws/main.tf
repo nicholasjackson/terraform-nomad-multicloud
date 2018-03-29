@@ -1,5 +1,6 @@
 module "nomad" {
-  source = "/Users/nicj/Developer/terraform/terraform-aws-hashicorp-suite"
+  source  = "nicholasjackson/hashicorp-suite/aws"
+  version = "0.2.1"
 
   namespace = "${var.namespace}"
 

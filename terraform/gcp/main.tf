@@ -1,5 +1,6 @@
 module "gcp" {
-  source = "/Users/nicj/Developer/terraform/terraform-gcp-hashicorp-suite"
+  source  = "nicholasjackson/hashicorp-suite/gcp"
+  version = "0.2.0"
 
   namespace = "${var.namespace}"
   zone      = "${var.zone}"
