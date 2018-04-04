@@ -16,6 +16,8 @@ var statsdAddr = flag.String("statsd_addr", "localhost:8125", "")
 var version = flag.String("version", "v1", "")
 var port = flag.Int("port", 8080, "")
 var allocID = flag.String("alloc_id", "localhost:8080", "")
+var privateKey = flag.String("tls_key", "", "")
+var cert = flag.String("tls_cert", "", "")
 
 var stats *statsd.Client
 
@@ -39,6 +41,17 @@ func main() {
 
 	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/", mainHandler)
+
+	if *privateKey != "" && *cert != "" {
+		log.Fatal(http.ListenAndServeTLS(
+			fmt.Sprintf(":%d", *port),
+			*cert,
+			*privateKey,
+			nil,
+		))
+	}
+
+	// otherwise no https
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), nil))
 }
 

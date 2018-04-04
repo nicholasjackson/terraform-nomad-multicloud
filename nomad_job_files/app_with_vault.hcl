@@ -15,7 +15,9 @@ job "test-app" {
         args = [
           "-statsd_addr", "${NOMAD_IP_http}:8125",
           "-version", "v1.1",
-          "-alloc_id","${NOMAD_ALLOC_ID}"
+          "-alloc_id","${NOMAD_ALLOC_ID}",
+          "-tls_key","secrets/key.pem",
+          "-tls_cert","secrets/cert.pem"
         ]
         
         port_map {
@@ -30,7 +32,7 @@ job "test-app" {
       template {
         destination = "secrets/cert.pem"
         data = <<EOT
-{{ with secret "pki/issue/my-role" "common_name=example.my-website.com" "ip_sans=127.0.0.1,{{ env "NOMAD_IP_http" }}" "ttl=24h"}}
+{{ with secret "pki/issue/my-role" "common_name=example.my-website.com" "ip_sans=127.0.0.1" "ttl=24h"}}
 {{ .Data.certificate }}{{ end }}
 EOT
       }
@@ -38,7 +40,7 @@ EOT
       template {
         destination = "secrets/key.pem"
         data = <<EOT
-{{ with secret "pki/issue/my-role" "common_name=example.my-website.com" "ip_sans=127.0.0.1,{{ env "NOMAD_IP_http" }}"}}" "ttl=24h"}}
+{{ with secret "pki/issue/my-role" "common_name=example.my-website.com" "ip_sans=127.0.0.1" "ttl=24h"}}
 {{ .Data.private_key }}{{ end }}
 EOT
       }
@@ -60,11 +62,13 @@ EOT
         tags = ["microservice", "urlprefix-/"]
 
         check {
-          type     = "http"
-          port     = "http"
-          interval = "10s"
-          timeout  = "2s"
-          path     = "/health"
+          type            = "http"
+          protocol        = "https"
+          tls_skip_verify = true
+          port            = "http"
+          interval        = "10s"
+          timeout         = "2s"
+          path            = "/health"
         }
       }
 
