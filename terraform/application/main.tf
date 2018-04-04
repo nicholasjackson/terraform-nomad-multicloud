@@ -1,6 +1,6 @@
 provider "nomad" {
   address = "http://localhost:5646"
-  region  = "aws"
+  region  = "gcp"
 }
 
 resource "nomad_job" "application" {

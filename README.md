@@ -23,7 +23,8 @@ $ terraform plan
 
 $ terraform apply
 ```
-
+## Running Vault
+Currently the config will install and configure Vault on AWS however it does not automatically setup Nomad, Vault is also currently not secured via TLS certificates.  This is provided for demonstration purposes only.
 
 ## Connecting to the cluster
 1. Obtain the external and internal ip addresses of a server from AWS
