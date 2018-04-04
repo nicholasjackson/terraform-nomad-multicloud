@@ -9,3 +9,7 @@ output "vpc_id" {
 output "route_table_id" {
   value = "${aws_vpc.default.main_route_table_id}"
 }
+
+output "alb" {
+  value = "${aws_alb.nomad.dns_name}"
+}

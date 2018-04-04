@@ -3,3 +3,5 @@ terraform.tfstate
 .terraform
 .terraform.tfstate.lock.info
 terraform.tfstate.backup
+test-server
+flow.md

@@ -12,6 +12,7 @@ module "aws" {
   vpc_cidr_block = "10.0.0.0/16"
 }
 
+/*
 # Create GCP resources including a Nomad cluster and network
 module "gcp" {
   source = "./gcp"
@@ -36,3 +37,5 @@ module "vpn" {
   aws_sg             = "${module.aws.security_group_id}"
   aws_route_table_id = "${module.aws.route_table_id}"
 }
+*/
+

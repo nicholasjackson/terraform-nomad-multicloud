@@ -5,10 +5,10 @@ module "gcp" {
   namespace = "${var.namespace}"
   zone      = "${var.zone}"
 
-  min_servers = "1"
-  max_servers = "3"
-  min_agents  = "3"
-  max_agents  = "5"
+  min_servers = "3"
+  max_servers = "5"
+  min_agents  = "5"
+  max_agents  = "8"
 
   vpc_id   = "${google_compute_network.nomad.name}"
   key_name = "~/.ssh/id_rsa.pub"
