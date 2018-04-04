@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/DataDog/datadog-go/statsd"
@@ -31,9 +32,10 @@ func main() {
 	}
 
 	stats.Namespace = "testapp."
-	stats.Incr("server.started", nil, 1)
 	stats.Tags = append(stats.Tags, "version:"+*version)
-	stats.Tags = append(stats.Tags, "alloc_id:"+*allocID)
+	stats.Tags = append(stats.Tags, "allocid:"+strings.Split(*allocID, "-")[0])
+
+	stats.Incr("server.started", nil, 1)
 
 	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/", mainHandler)
